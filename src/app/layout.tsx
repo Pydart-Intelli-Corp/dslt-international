@@ -9,7 +9,6 @@ export const metadata = {
   description: 'The future of crypto commerce: Token launch, e-commerce integration, debit card, NFT marketplace, staking rewards, and dedicated exchange + wallet.',
   keywords: 'DSLT, cryptocurrency, token, blockchain, e-commerce, debit card, NFT, staking, exchange, wallet',
   author: 'DSLT Team',
-  viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: [
       { url: '/logo.png', sizes: 'any' },
@@ -34,6 +33,11 @@ export const metadata = {
     description: 'The future of crypto commerce',
     images: ['/logo.png'],
   },
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

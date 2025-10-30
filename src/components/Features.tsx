@@ -52,8 +52,9 @@ const features = [
 
 export default function Features() {
   const [ref, inView] = useInView({
-    threshold: 0.2,
+    threshold: 0.1, // Reduced for mobile
     triggerOnce: true,
+    rootMargin: '50px 0px', // Add margin for better mobile detection
   })
 
   return (

@@ -4,6 +4,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Enable compression
+  compress: true,
+  // Optimize for production
+  swcMinify: true,
+  // Remove console logs in production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 }
 
 module.exports = nextConfig

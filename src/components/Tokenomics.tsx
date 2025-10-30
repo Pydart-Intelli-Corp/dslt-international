@@ -12,13 +12,6 @@ const tokenomicsData = [
     description: 'Multi-mining, airdrops, staking rewards, liquidity mining'
   },
   {
-    category: 'Company Holdings',
-    percentage: 10,
-    amount: '250M DSLT',
-    color: 'accent-purple',
-    description: 'Strategic reserve with 48-month vesting'
-  },
-  {
     category: 'Project Development',
     percentage: 25,
     amount: '625M DSLT',
@@ -26,11 +19,11 @@ const tokenomicsData = [
     description: 'Partnerships, integrations, ecosystem development'
   },
   {
-    category: 'Development Team',
-    percentage: 7,
-    amount: '175M DSLT',
-    color: 'accent-blue',
-    description: 'Team allocation with cliff and linear vesting'
+    category: 'Company Holdings',
+    percentage: 10,
+    amount: '250M DSLT',
+    color: 'accent-purple',
+    description: 'Strategic reserve with 48-month vesting'
   },
   {
     category: 'Liquidity & Listings',
@@ -38,6 +31,13 @@ const tokenomicsData = [
     amount: '200M DSLT',
     color: 'pink-500',
     description: 'Exchange listings and market making'
+  },
+  {
+    category: 'Development Team',
+    percentage: 7,
+    amount: '175M DSLT',
+    color: 'accent-blue',
+    description: 'Team allocation with cliff and linear vesting'
   },
   {
     category: 'Others',
@@ -58,8 +58,9 @@ const miningInfo = {
 
 export default function Tokenomics() {
   const [ref, inView] = useInView({
-    threshold: 0.2,
+    threshold: 0.1, // Better for mobile
     triggerOnce: true,
+    rootMargin: '50px 0px', // Add margin for earlier trigger
   })
 
   return (

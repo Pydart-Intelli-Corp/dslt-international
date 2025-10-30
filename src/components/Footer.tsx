@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import Image from 'next/image'
+import Link from 'next/link'
 import { 
   ChatBubbleLeftRightIcon, 
   DevicePhoneMobileIcon, 
@@ -11,8 +13,9 @@ import {
 
 export default function Footer() {
   const [ref, inView] = useInView({
-    threshold: 0.3,
+    threshold: 0.1, // Lower threshold for mobile
     triggerOnce: true,
+    rootMargin: '50px 0px', // Trigger earlier
   })
 
   const footerSections = [
@@ -62,19 +65,39 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Main Footer Content */}
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
-          {/* Brand Section */}
+          {/* Brand Section - Using Header Logos */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
             className="lg:col-span-2"
           >
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-accent-blue to-accent-purple rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">D</span>
-              </div>
-              <span className="text-3xl font-bold gradient-text">DSLT</span>
-            </div>
+            {/* Logo - Same as Header */}
+            <Link href="/">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center cursor-pointer space-x-3 mb-6"
+              >
+                <div className="relative w-10 h-10 md:w-12 md:h-12">
+                  <Image
+                    src="/logo.png"
+                    alt="DSLT Icon"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                <div className="relative w-28 h-10 md:w-36 md:h-12">
+                  <Image
+                    src="/dslt.png"
+                    alt="DSLT Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </motion.div>
+            </Link>
             
             <p className="text-text-secondary mb-6 leading-relaxed">
               Building the future of crypto commerce through an integrated ecosystem 

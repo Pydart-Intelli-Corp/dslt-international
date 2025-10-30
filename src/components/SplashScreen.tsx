@@ -1,19 +1,69 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
 export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Memoize background elements to prevent re-creation
+  const backgroundElements = useMemo(() => ({
+    orbs: [...Array(3)].map((_, i) => ({
+      id: i,
+      style: {
+        background: i === 0 
+          ? 'radial-gradient(circle, rgba(87,44,124,0.3) 0%, transparent 70%)'
+          : i === 1
+          ? 'radial-gradient(circle, rgba(130,49,199,0.3) 0%, transparent 70%)'
+          : 'radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%)',
+        left: `${20 + i * 30}%`,
+        top: `${20 + i * 25}%`,
+        width: '250px',
+        height: '250px',
+        animationDelay: `${i * 7}s`,
+      }
+    })),
+    particles: [...Array(8)].map((_, i) => ({
+      id: i,
+      className: `particle particle-${(i % 3) + 1}`,
+      style: {
+        left: `${15 + i * 10}%`,
+        top: `${25 + (i * 12) % 50}%`,
+        animationDelay: `${i * 1.2}s`,
+      }
+    })),
+    twinkles: [...Array(6)].map((_, i) => ({
+      id: i,
+      style: {
+        background: i % 3 === 0 ? '#572c7c' : i % 3 === 1 ? '#8231c7' : '#00d4ff',
+        left: `${20 + i * 12}%`,
+        top: `${30 + i * 8}%`,
+        animationDelay: `${i * 0.8}s`,
+        animationDuration: '2.5s',
+      }
+    }))
+  }), [])
 
   useEffect(() => {
+    // Mobile detection
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
     // Hide splash screen after 2.5 seconds
     const timer = setTimeout(() => {
       setIsVisible(false)
     }, 2500)
 
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('resize', checkMobile)
+    }
   }, [])
 
   return (
@@ -25,56 +75,82 @@ export default function SplashScreen() {
           transition={{ duration: 0.5 }}
           className="fixed inset-0 z-[9999] flex items-center justify-center pt-32 bg-dark-bg-deeper overflow-hidden"
         >
-          {/* Animated Background Effects */}
+          {/* Optimized Crypto Mining Background Effects - Mobile Friendly */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Cyber Grid */}
-            <div className="absolute inset-0 cyber-grid opacity-3"></div>
+            {/* Cyber Grid - reduced opacity on mobile */}
+            <div className={`absolute inset-0 cyber-grid ${isMobile ? 'opacity-1' : 'opacity-3'}`}></div>
             
-            {/* Large Gradient Orbs */}
-            {[...Array(8)].map((_, i) => (
+            {/* Mining Hash Indicators - Now visible on mobile */}
+            {[...Array(isMobile ? 4 : 6)].map((_, i) => (
               <div
-                key={`orb-${i}`}
-                className="absolute rounded-full blur-3xl opacity-30 animate-float-slow"
+                key={`hash-indicator-${i}`}
+                className="absolute text-xs font-mono opacity-20 animate-pulse"
                 style={{
-                  background: i % 3 === 0 
-                    ? 'radial-gradient(circle, rgba(87,44,124,0.4) 0%, rgba(87,44,124,0.1) 50%, transparent 100%)'
-                    : i % 3 === 1
-                    ? 'radial-gradient(circle, rgba(130,49,199,0.4) 0%, rgba(130,49,199,0.1) 50%, transparent 100%)'
-                    : 'radial-gradient(circle, rgba(0,212,255,0.3) 0%, rgba(0,212,255,0.1) 50%, transparent 100%)',
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  width: `${200 + Math.random() * 300}px`,
-                  height: `${200 + Math.random() * 300}px`,
-                  animationDelay: `${Math.random() * 20}s`,
+                  left: `${20 + i * (isMobile ? 18 : 12)}%`,
+                  top: `${25 + (i * 10) % 50}%`,
+                  color: i % 3 === 0 ? '#00d4ff' : i % 3 === 1 ? '#572c7c' : '#00ff88',
+                  animationDelay: `${i * 0.8}s`,
                 }}
+              >
+                {i % 2 === 0 ? '⬡' : '#'}
+              </div>
+            ))}
+            
+            {/* Crypto Symbols - Mobile Optimized */}
+            {[...Array(isMobile ? 3 : 5)].map((_, i) => (
+              <div
+                key={`crypto-symbol-${i}`}
+                className="absolute text-sm opacity-30 animate-bounce"
+                style={{
+                  left: `${30 + i * (isMobile ? 20 : 15)}%`,
+                  top: `${40 + i * 12}%`,
+                  color: i % 4 === 0 ? '#f7931a' : i % 4 === 1 ? '#627eea' : i % 4 === 2 ? '#00d4ff' : '#00ff88',
+                  animationDelay: `${i * 1.5}s`,
+                  animationDuration: '3s',
+                }}
+              >
+                {i % 4 === 0 ? '₿' : i % 4 === 1 ? 'Ξ' : i % 4 === 2 ? '⟐' : '◊'}
+              </div>
+            ))}
+            
+            {/* Reduced Large Gradient Orbs - smaller on mobile */}
+            {backgroundElements.orbs.map((orb) => (
+              <div
+                key={orb.id}
+                className={`absolute rounded-full blur-2xl opacity-20 animate-float-slow ${isMobile ? 'scale-50' : ''}`}
+                style={orb.style}
               />
             ))}
             
-            {/* Floating Particles */}
-            {[...Array(30)].map((_, i) => (
+            {/* Mining Status Indicators */}
+            <div className="absolute top-20 left-8 opacity-40 hidden md:block">
+              <div className="flex flex-col space-y-2">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
+                  <span className="text-xs font-mono text-accent-green">MINING ACTIVE</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 rounded-full bg-accent-blue animate-pulse" style={{ animationDelay: '0.5s' }} />
+                  <span className="text-xs font-mono text-accent-blue">SYNCING BLOCKS</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Optimized Floating Particles */}
+            {backgroundElements.particles.map((particle) => (
               <div
-                key={i}
-                className={`particle particle-${(i % 3) + 1}`}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 10}s`,
-                }}
+                key={particle.id}
+                className={particle.className}
+                style={particle.style}
               />
             ))}
 
-            {/* Twinkling Dots */}
-            {[...Array(20)].map((_, i) => (
+            {/* Reduced Twinkling Dots */}
+            {backgroundElements.twinkles.map((twinkle) => (
               <div
-                key={`twinkle-${i}`}
+                key={twinkle.id}
                 className="absolute w-1 h-1 rounded-full animate-pulse"
-                style={{
-                  background: i % 3 === 0 ? '#572c7c' : i % 3 === 1 ? '#8231c7' : '#00d4ff',
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 5}s`,
-                  animationDuration: `${2 + Math.random() * 3}s`,
-                }}
+                style={twinkle.style}
               />
             ))}
           </div>

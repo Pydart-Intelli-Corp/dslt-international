@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
@@ -19,25 +19,36 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+  // Memoize the scroll handler to prevent unnecessary re-renders
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 50)
   }, [])
+
+  // Memoize the mobile menu toggle
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prev => !prev)
+  }, [])
+
+  // Memoize the header class to prevent recalculation
+  const headerClass = useMemo(() => 
+    `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'glass-card border-b border-accent-purple/20' 
+        : 'bg-transparent'
+    }`, [isScrolled]
+  )
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'glass-card border-b border-accent-purple/20' 
-          : 'bg-transparent'
-      }`}
+      className={headerClass}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
@@ -109,7 +120,7 @@ export default function Header() {
           <div className="md:hidden">
             <motion.button
               whileTap={{ scale: 0.95 }}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={toggleMobileMenu}
               className="text-text-primary hover:text-accent-purple-light transition-colors duration-300"
             >
               {isMobileMenuOpen ? (

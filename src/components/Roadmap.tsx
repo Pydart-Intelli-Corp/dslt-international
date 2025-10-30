@@ -75,8 +75,9 @@ const roadmapData = [
 
 export default function Roadmap() {
   const [ref, inView] = useInView({
-    threshold: 0.2,
+    threshold: 0.1, // Mobile optimized
     triggerOnce: true,
+    rootMargin: '50px 0px', // Trigger earlier on mobile
   })
 
   const getStatusColor = (status: string) => {
