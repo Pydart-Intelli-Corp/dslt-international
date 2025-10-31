@@ -105,7 +105,7 @@ export default function Footer() {
             </p>
 
             {/* Social Links */}
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-6">
               {[
                 { name: 'Twitter', icon: XMarkIcon },
                 { name: 'Telegram', icon: DevicePhoneMobileIcon },
@@ -125,6 +125,47 @@ export default function Footer() {
                   </motion.a>
                 )
               })}
+            </div>
+
+            {/* Contact Email Section */}
+            <div className="p-3 glass-effect rounded-xl border border-accent-purple/20 mb-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <div className="w-2 h-2 bg-accent-green rounded-full animate-pulse"></div>
+                <span className="text-sm font-semibold text-accent-purple-light">Contact Us</span>
+              </div>
+              <a 
+                href="mailto:dsltokenuk@gmail.com"
+                className="text-xs text-text-secondary hover:text-accent-blue transition-colors duration-300 break-all"
+              >
+                dsltokenuk@gmail.com
+              </a>
+            </div>
+
+            {/* Contract Address Section */}
+            <div className="p-3 glass-effect rounded-xl border border-accent-blue/20">
+              <div className="flex items-center space-x-2 mb-2">
+                <div className="w-2 h-2 bg-accent-green rounded-full animate-pulse"></div>
+                <span className="text-sm font-semibold text-accent-blue">Token Contract</span>
+              </div>
+              <div className="flex items-center justify-between space-x-3">
+                <code className="text-xs font-mono text-text-secondary bg-dark-surface/50 px-2 py-1 rounded flex-1 break-all">
+                  0x6652b040dc603df11be01ceedcbf3ba0965fe8c1
+                </code>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => {
+                    navigator.clipboard.writeText('0x6652b040dc603df11be01ceedcbf3ba0965fe8c1')
+                    // You could add a toast notification here
+                  }}
+                  className="text-accent-purple-light hover:text-accent-blue transition-colors duration-200 flex-shrink-0"
+                  title="Copy contract address"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </motion.button>
+              </div>
             </div>
           </motion.div>
 

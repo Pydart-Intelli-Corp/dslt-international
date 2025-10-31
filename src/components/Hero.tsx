@@ -411,6 +411,34 @@ export default function Hero() {
                 <p className={`text-center text-accent-purple-light mt-2 font-medium ${isMobile ? 'text-xs' : 'text-xs'}`}>
                   ⚡ Multi-Mining System Active - +10% per block completion
                 </p>
+                
+                {/* Contract Address */}
+                <div className={`mt-4 p-2 glass-effect rounded-lg border border-accent-purple/30`}>
+                  <div className="text-center">
+                    <p className={`text-text-secondary mb-1 ${isMobile ? 'text-xs' : 'text-xs'}`}>
+                      Contract Address:
+                    </p>
+                    <div className="flex items-center justify-center space-x-2">
+                      <code className={`text-accent-blue font-mono bg-dark-surface/50 px-1.5 py-0.5 rounded ${isMobile ? 'text-xs' : 'text-xs'} break-all`}>
+                        0x6652b040dc603df11be01ceedcbf3ba0965fe8c1
+                      </code>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => {
+                          navigator.clipboard.writeText('0x6652b040dc603df11be01ceedcbf3ba0965fe8c1')
+                          // You could add a toast notification here
+                        }}
+                        className="text-accent-purple-light hover:text-accent-blue transition-colors duration-200"
+                        title="Copy to clipboard"
+                      >
+                        <svg className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </motion.button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
