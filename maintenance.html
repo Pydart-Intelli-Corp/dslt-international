@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSLT - Under Maintenance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e  50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-effects {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .floating-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(87, 44, 124, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
+            50% { transform: translateY(-100px) translateX(50px); opacity: 0.8; }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: url('/logo.png') center/contain no-repeat;
+        }
+
+        .logo-text {
+            width: 150px;
+            height: 60px;
+            background: url('/dslt.png') center/contain no-repeat;
+        }
+
+        .maintenance-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, rgba(87, 44, 124, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(87, 44, 124, 0.3);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .wrench-icon {
+            width: 40px;
+            height: 40px;
+            fill: #9b4ddb;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #9b4ddb 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .timer-container {
+            background: rgba(15, 15, 30, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(87, 44, 124, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timer-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .timer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, rgba(87, 44, 124, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);
+            border: 1px solid rgba(87, 44, 124, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .timer-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #9b4ddb;
+        }
+
+        .timer-label {
+            font-size: 0.8rem;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .contact-box {
+            background: rgba(15, 15, 30, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-box:hover {
+            border-color: rgba(87, 44, 124, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            fill: #00d4ff;
+        }
+
+        .contact-info a {
+            color: #00d4ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #9b4ddb;
+        }
+
+        .progress-section {
+            margin-top: 3rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(15, 15, 30, 0.5);
+            border: 1px solid rgba(87, 44, 124, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #9b4ddb 0%, #00d4ff 100%);
+            width: 75%;
+            animation: progress 2s ease-in-out;
+        }
+
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 75%; }
+        }
+
+        .progress-text {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #9b4ddb;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .logo-section { flex-direction: column; gap: 0.5rem; }
+            .timer { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+            .timer-value { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-effects">
+        <!-- Floating particles will be generated by JavaScript -->
+    </div>
+
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo-icon"></div>
+            <div class="logo-text"></div>
+        </div>
+
+        <!-- Maintenance Icon -->
+        <div class="maintenance-icon">
+            <svg class="wrench-icon" viewBox="0 0 24 24">
+                <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+            </svg>
+        </div>
+
+        <!-- Main Content -->
+        <h1>Under Maintenance</h1>
+        <p class="subtitle">
+            We're upgrading our crypto ecosystem to serve you better.<br>
+            The future of digital payments is being enhanced!
+        </p>
+
+        <!-- Countdown Timer -->
+        <div class="timer-container">
+            <div class="timer-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                </svg>
+                Estimated Return Time
+            </div>
+            <div class="timer">
+                <div class="timer-box">
+                    <div class="timer-value" id="hours">02</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-box">
+                    <div class="timer-value" id="minutes">30</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-box">
+                    <div class="timer-value" id="seconds">00</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-grid">
+            <div class="contact-box">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <div class="contact-info">
+                    <div style="font-size: 0.9rem; color: #b0b0b0;">Contact Us</div>
+                    <a href="mailto:dsltokenuk@gmail.com">dsltokenuk@gmail.com</a>
+                </div>
+            </div>
+            <div class="contact-box">
+                <div style="width: 8px; height: 8px; background: #00ff88; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                <div class="contact-info">
+                    <div style="font-size: 0.9rem; color: #b0b0b0;">Status</div>
+                    <div style="color: #00ff88; font-weight: 600;">System Upgrade in Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-section">
+            <div style="font-size: 0.9rem; color: #b0b0b0; margin-bottom: 0.5rem;">Upgrade Progress</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-text">75% Complete</div>
+        </div>
+    </div>
+
+    <script>
+        // Generate floating particles
+        function createParticles() {
+            const container = document.querySelector('.background-effects');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'floating-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Countdown timer
+        let timeLeft = {
+            hours: 2,
+            minutes: 30,
+            seconds: 0
+        };
+
+        function updateTimer() {
+            if (timeLeft.seconds > 0) {
+                timeLeft.seconds--;
+            } else if (timeLeft.minutes > 0) {
+                timeLeft.minutes--;
+                timeLeft.seconds = 59;
+            } else if (timeLeft.hours > 0) {
+                timeLeft.hours--;
+                timeLeft.minutes = 59;
+                timeLeft.seconds = 59;
+            }
+
+            document.getElementById('hours').textContent = timeLeft.hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = timeLeft.minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = timeLeft.seconds.toString().padStart(2, '0');
+        }
+
+        // Pulse animation for status indicator
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        createParticles();
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
