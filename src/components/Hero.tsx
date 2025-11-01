@@ -297,12 +297,16 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-row gap-3 justify-center lg:justify-start"
             >
-              <button className={`btn-primary rounded-xl font-semibold ${isMobile ? 'px-4 py-2 text-sm' : 'px-4 py-2.5 sm:px-8 sm:py-4 text-sm sm:text-lg'}`}>
-                SIGN UP
-              </button>
-              <button className={`btn-outline rounded-xl font-semibold text-accent-purple-light ${isMobile ? 'px-4 py-2 text-sm' : 'px-4 py-2.5 sm:px-8 sm:py-4 text-sm sm:text-lg'}`}>
-                LOGIN
-              </button>
+              <a href="https://app.dsltoken.com/login" target="_blank" rel="noopener noreferrer">
+                <button className={`btn-primary rounded-xl font-semibold ${isMobile ? 'px-4 py-2 text-sm' : 'px-4 py-2.5 sm:px-8 sm:py-4 text-sm sm:text-lg'}`}>
+                  SIGN UP
+                </button>
+              </a>
+              <a href="https://app.dsltoken.com/login" target="_blank" rel="noopener noreferrer">
+                <button className={`btn-outline rounded-xl font-semibold text-accent-purple-light ${isMobile ? 'px-4 py-2 text-sm' : 'px-4 py-2.5 sm:px-8 sm:py-4 text-sm sm:text-lg'}`}>
+                  LOGIN
+                </button>
+              </a>
             </motion.div>
           </motion.div>
 
@@ -395,17 +399,19 @@ export default function Hero() {
 
               {/* CTA Button */}
               <div className="relative z-10">
-                <motion.button
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`btn-primary w-full rounded-xl font-bold text-white relative overflow-hidden group ${isMobile ? 'py-3' : 'py-4'}`}
-                >
-                  <span className="relative z-10 flex items-center justify-center space-x-2">
-                    <GiftIcon className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'}`} />
-                    <span className={isMobile ? 'text-sm' : 'text-base'}>JOIN EARLY ADOPTERS</span>
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent-purple-light to-accent-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </motion.button>
+                <a href="https://app.dsltoken.com/login" target="_blank" rel="noopener noreferrer">
+                  <motion.button
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`btn-primary w-full rounded-xl font-bold text-white relative overflow-hidden group ${isMobile ? 'py-3' : 'py-4'}`}
+                  >
+                    <span className="relative z-10 flex items-center justify-center space-x-2">
+                      <GiftIcon className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'}`} />
+                      <span className={isMobile ? 'text-sm' : 'text-base'}>JOIN EARLY ADOPTERS</span>
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-accent-purple-light to-accent-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </motion.button>
+                </a>
                 
                 {/* Multi-Mining Info */}
                 <p className={`text-center text-accent-purple-light mt-2 font-medium ${isMobile ? 'text-xs' : 'text-xs'}`}>
