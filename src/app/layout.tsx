@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import SplashScreen from '@/components/SplashScreen'
+import MaintenanceChecker from '@/components/MaintenanceChecker'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -49,7 +50,9 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${inter.className} antialiased`} style={{background: '#0f0f1e', color: '#ffffff'}}>
         <SplashScreen />
-        {children}
+        <MaintenanceChecker>
+          {children}
+        </MaintenanceChecker>
       </body>
     </html>
   )

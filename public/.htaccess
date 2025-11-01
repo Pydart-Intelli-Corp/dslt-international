@@ -1,0 +1,29 @@
+RewriteEngine On
+
+# Handle maintenance page
+RewriteRule ^maintenance/?$ /maintenance.html [L]
+
+# Handle admin page
+RewriteRule ^admin/?$ /admin.html [L]
+
+# Handle other pages
+RewriteRule ^about/?$ /about.html [L]
+RewriteRule ^contact/?$ /contact.html [L]
+RewriteRule ^whitepaper/?$ /whitepaper.html [L]
+
+# Handle maintenance redirect
+RewriteCond %{REQUEST_URI} !^/maintenance
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteCond %{REQUEST_URI} !^/_next/
+RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|mp4)$
+RewriteCond %{QUERY_STRING} !bypass=dslt_admin_2025
+# Add condition to check if maintenance is enabled (you'll need to implement this)
+# RewriteRule ^(.*)$ /maintenance.html [R=302,L]
+
+# Fallback for clean URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^.]+)/?$ /$1.html [L]
+
+# Custom 404 page
+ErrorDocument 404 /404.html

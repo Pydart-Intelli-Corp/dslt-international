@@ -1,0 +1,10 @@
+{
+  "enabled": false,
+  "message": "We're upgrading our crypto ecosystem to serve you better. The future of digital payments is being enhanced!",
+  "customMessage": "System upgrade in progress - Enhanced security and performance features coming soon!",
+  "bypassKey": "dslt_admin_2025",
+  "scheduledStart": "2025-10-31T12:00:00.000Z",
+  "scheduledEnd": "2025-11-10T18:00:00.000Z",
+  "autoScheduled": false,
+  "lastUpdated": "2025-10-31T11:48:44.240Z"
+}
