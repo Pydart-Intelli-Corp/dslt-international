@@ -253,13 +253,15 @@ export default function Roadmap() {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="text-center mt-16"
         >
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0, 212, 255, 0.3)' }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-accent-blue to-accent-purple rounded-xl font-semibold text-lg btn-primary"
-          >
-            View Detailed Roadmap
-          </motion.button>
+          <a href="/whitepaper.pdf" download>
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0, 212, 255, 0.3)' }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-gradient-to-r from-accent-blue to-accent-purple rounded-xl font-semibold text-lg btn-primary"
+            >
+              View Detailed Roadmap
+            </motion.button>
+          </a>
         </motion.div>
       </div>
     </section>

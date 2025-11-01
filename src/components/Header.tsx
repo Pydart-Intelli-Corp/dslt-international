@@ -98,7 +98,7 @@ export default function Header() {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/whitepaper">
+            <a href="/whitepaper.pdf" download>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -106,14 +106,7 @@ export default function Header() {
               >
                 Whitepaper
               </motion.button>
-            </Link>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-primary px-6 py-2 rounded-lg font-semibold"
-            >
-              Launch App
-            </motion.button>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -154,14 +147,11 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-4 space-y-2">
-              <Link href="/whitepaper">
+              <a href="/whitepaper.pdf" download>
                 <button className="btn-outline w-full px-4 py-2 text-accent-purple-light rounded-lg">
                   Whitepaper
                 </button>
-              </Link>
-              <button className="btn-primary w-full px-6 py-2 rounded-lg font-semibold">
-                Launch App
-              </button>
+              </a>
             </div>
           </motion.div>
         )}
